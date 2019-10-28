@@ -1,0 +1,31 @@
+---
+schema: armada/Manifest/v1
+metadata:
+  schema: metadata/Document/v1
+  name: full-site-global
+  layeringDefinition:
+    abstract: true 
+    layer: global
+  storagePolicy: cleartext
+data:
+  release_prefix: airship
+  chart_groups:
+    - kubernetes-proxy
+    - kubernetes-container-networking
+    - kubernetes-dns
+    - kubernetes-etcd
+    - kubernetes-haproxy
+    - kubernetes-core
+    - kubernetes-tiller
+    - ingress-kube-system
+    - ucp-ceph-update
+    - ucp-core
+    - ucp-keystone
+    - ucp-divingbell
+    - ucp-services
+    - openstack-ceph-config
+    - openstack-ingress-controller
+    - openstack-component-infrastructure
+    - openstack-component-shared
+    - openstack-compute-kit
+...

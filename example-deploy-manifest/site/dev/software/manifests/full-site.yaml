@@ -1,0 +1,19 @@
+---
+schema: armada/Manifest/v1
+metadata:
+  schema: metadata/Document/v1
+  name: full-site
+  layeringDefinition:
+    abstract: false
+    layer: site 
+    parentSelector:
+      name: full-site-global
+    actions:
+      - method: merge
+        path: .
+  storagePolicy: cleartext
+data:
+  release_prefix: airship
+  chart_groups:
+    - openstack-ingress-controller
+...

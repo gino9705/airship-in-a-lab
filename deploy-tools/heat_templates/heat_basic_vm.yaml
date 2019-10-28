@@ -1,0 +1,44 @@
+heat_template_version: 2016-10-14
+
+parameters:
+  image_id:
+        type: string
+        default: ubuntu1604
+  keyname:
+        type: string
+        default: heat-vm-key
+  availability_zone:
+        type: string
+        default: nova
+
+resources:
+  private_net:
+        type: OS::Neutron::Net
+        properties:
+          name: private-net
+
+  private_subnet:
+        type: OS::Neutron::Subnet
+        properties:
+          network_id: { get_resource: private_net }
+          cidr: 172.16.2.0/24
+          gateway_ip: 172.16.2.1
+
+  server1_port:
+        type: OS::Neutron::Port
+        properties:
+          network_id: { get_resource: private_net }
+          security_groups: [ 'david' ]
+          fixed_ips:
+                - subnet_id: { get_resource: private_subnet }
+
+  server1:
+        type: OS::Nova::Server
+        properties:
+          name: Server1
+          image: { get_param: image_id }
+          key_name: { get_param: keyname }
+          availability_zone: { get_param: availability_zone }
+          flavor: m1.medium
+          networks:
+                - port: { get_resource: server1_port }

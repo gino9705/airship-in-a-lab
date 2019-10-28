@@ -1,0 +1,686 @@
+---
+schema: pegleg/SoftwareVersions/v1
+metadata:
+  schema: metadata/Document/v1
+  name: software-versions
+  layeringDefinition:
+    abstract: false
+    layer: global
+  storagePolicy: cleartext
+data:
+  charts:
+    dependencies:
+      ucp-helm-toolkit:
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: helm-toolkit
+        reference: master
+    kubernetes:
+      calico:
+        etcd:
+          proxy_server: http://127.0.0.1:3128
+          type: git
+          location: https://git.openstack.org/openstack/airship-promenade
+          subpath: charts/etcd
+          reference: 146c67c6b15d8eccf942d2c048f96c3305948864
+        etcd-htk:
+          proxy_server: http://127.0.0.1:3128
+          type: git
+          location: https://git.openstack.org/openstack/openstack-helm-infra
+          subpath: helm-toolkit
+          reference: 92f024ba562f2f8b06286dc6263e0ea9dc2c1477
+        calico:
+          proxy_server: http://127.0.0.1:3128
+          type: git
+          location: https://git.openstack.org/openstack/openstack-helm-infra
+          subpath: calico
+          reference: f402171e42356bc1e805782f1d7f090ce1f6ab17
+        calico-htk:
+          proxy_server: http://127.0.0.1:3128
+          type: git
+          location: https://git.openstack.org/openstack/openstack-helm-infra
+          subpath: helm-toolkit
+          reference: f402171e42356bc1e805782f1d7f090ce1f6ab17
+      #apiserver:
+      #  proxy_server: http://127.0.0.1:3128 
+      #  type: git
+      #  location: https://github.com/${URL}/promenade
+      #  subpath: charts/apiserver
+      #  reference: 31c2fc8346c6e6418c74860c0a31d73c7d154ca5
+      #apiserver-htk:
+      #  proxy_server: http://127.0.0.1:3128 
+      #  type: git
+      #  location: https://github.com/openstack/openstack-helm
+      #  subpath: helm-toolkit
+      #  reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      #controller-manager:
+      #  proxy_server: http://127.0.0.1:3128
+      #  type: git
+      #  location: https://github.com/${URL}/promenade
+      #  subpath: charts/controller_manager
+      #  reference: 31c2fc8346c6e6418c74860c0a31d73c7d154ca5
+      #controller-manager-htk:
+      #  proxy_server: http://127.0.0.1:3128
+      #  type: git
+      #  location: https://github.com/openstack/openstack-helm
+      #  subpath: helm-toolkit
+      #  reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      apiserver:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/airship-promenade
+        subpath: charts/apiserver
+        reference: 146c67c6b15d8eccf942d2c048f96c3305948864
+      apiserver-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 92f024ba562f2f8b06286dc6263e0ea9dc2c1477
+      controller-manager:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/airship-promenade
+        subpath: charts/controller_manager
+        reference: 146c67c6b15d8eccf942d2c048f96c3305948864
+      controller-manager-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 92f024ba562f2f8b06286dc6263e0ea9dc2c1477
+      coredns:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/airship-promenade
+        subpath: charts/coredns
+        reference: 146c67c6b15d8eccf942d2c048f96c3305948864
+      coredns-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 92f024ba562f2f8b06286dc6263e0ea9dc2c1477
+      haproxy:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/airship-promenade
+        subpath: charts/haproxy
+        reference: 146c67c6b15d8eccf942d2c048f96c3305948864
+      haproxy-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 92f024ba562f2f8b06286dc6263e0ea9dc2c1477
+      etcd:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/airship-promenade
+        subpath: charts/etcd
+        reference: 146c67c6b15d8eccf942d2c048f96c3305948864
+      etcd-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 92f024ba562f2f8b06286dc6263e0ea9dc2c1477
+      ingress:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: ingress
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      ingress-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: helm-toolkit
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      proxy:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/airship-promenade
+        subpath: charts/proxy
+        reference: 146c67c6b15d8eccf942d2c048f96c3305948864
+      proxy-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 92f024ba562f2f8b06286dc6263e0ea9dc2c1477
+      scheduler:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/airship-promenade
+        subpath: charts/scheduler
+        reference: 146c67c6b15d8eccf942d2c048f96c3305948864
+      scheduler-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 92f024ba562f2f8b06286dc6263e0ea9dc2c1477
+    ucp:
+      nfs_provisioner:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: nfs-provisioner
+        reference: f402171e42356bc1e805782f1d7f090ce1f6ab17
+      nfs_htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: f402171e42356bc1e805782f1d7f090ce1f6ab17
+      armada:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/airship-armada
+        subpath: charts/armada
+        reference: b6479f660714a6d14c6aa291dc36b8451f1c9219
+      armada-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 35ac52023a75e44ff4ef1874857952a5b3dbf561
+      barbican:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: barbican
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      barbican-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: helm-toolkit
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      ceph:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: ceph
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      ceph-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: helm-toolkit
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      deckhand:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/airship-deckhand
+        subpath: charts/deckhand
+        reference: 59182380e3272fd28f9c21b2e7cdc784f7a36f74
+      deckhand-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: helm-toolkit
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      divingbell:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/airship-divingbell
+        subpath: divingbell
+        reference: 9e7028416e8b6798c1b2bf04770bd165e398b5c1
+      divingbell-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: helm-toolkit
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      drydock:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/airship-drydock
+        subpath: charts/drydock
+        reference: 7e7739ce2cbe3156a8ecec854639052542d40dcf
+      drydock-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: helm-toolkit
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      ingress:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: ingress
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      ingress-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: helm-toolkit
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      postgresql:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: postgresql
+        reference: 8dc986740c83487261efa6540f89d5dbea211f98
+      postgresql-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 9f921f23fb2df702981a0b3d33062ff607350f75
+      promenade:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/airship-promenade
+        subpath: charts/promenade
+        reference: 146c67c6b15d8eccf942d2c048f96c3305948864
+      promenade-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 92f024ba562f2f8b06286dc6263e0ea9dc2c1477
+      keystone:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: keystone
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      keystone-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: helm-toolkit
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      maas:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/airship-maas
+        subpath: charts/maas
+        reference: 7af3ee934732bf1aec6b452f34727ef563a7f179
+      maas-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: helm-toolkit
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      #mariadb:
+      #  proxy_server: http://127.0.0.1:3128
+      #  type: git
+      #  location: https://git.openstack.org/openstack/openstack-helm
+      #  subpath: mariadb
+      #  reference: 8dc986740c83487261efa6540f89d5dbea211f98
+      #mariadb-htk:
+      #  proxy_server: http://127.0.0.1:3128
+      #  type: git
+      #  location: https://git.openstack.org/openstack/openstack-helm-infra
+      #  subpath: helm-toolkit
+      #  reference: 92f024ba562f2f8b06286dc6263e0ea9dc2c1477
+      mariadb:
+        proxy_server: http://127.0.0.1:3128 
+        type: git
+        location: https://github.com/openstack/openstack-helm
+        subpath: mariadb
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      mariadb-htk:
+        proxy_server: http://127.0.0.1:3128 
+        type: git
+        location: https://github.com/openstack/openstack-helm
+        subpath: helm-toolkit
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      memcached:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: memcached
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      memcached-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: helm-toolkit
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      rabbitmq:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: rabbitmq
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      rabbitmq-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: helm-toolkit
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      shipyard:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/airship-shipyard
+        subpath: charts/shipyard
+        reference: 66da23cb20c545bf82e7d1aec321edf9ebc06cac
+      shipyard-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 92f024ba562f2f8b06286dc6263e0ea9dc2c1477
+      tiller:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/airship-armada
+        subpath: charts/tiller
+        reference: b6479f660714a6d14c6aa291dc36b8451f1c9219
+      tiller-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 35ac52023a75e44ff4ef1874857952a5b3dbf561
+    openstack:
+      glance:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: glance
+        reference: a4fa9b761e2de14df588c1e37f3693174f15ad36
+      glance-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 9f921f23fb2df702981a0b3d33062ff607350f75
+      heat:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: heat
+        reference: a4fa9b761e2de14df588c1e37f3693174f15ad36
+      heat-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 9f921f23fb2df702981a0b3d33062ff607350f75
+      horizon:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: horizon
+        reference: a4fa9b761e2de14df588c1e37f3693174f15ad36
+      horizon-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 9f921f23fb2df702981a0b3d33062ff607350f75
+      ingress:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: ingress
+        reference: a4fa9b761e2de14df588c1e37f3693174f15ad36
+      ingress-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 9f921f23fb2df702981a0b3d33062ff607350f75
+      keystone:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: keystone
+        reference: a4fa9b761e2de14df588c1e37f3693174f15ad36
+      keystone-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 9f921f23fb2df702981a0b3d33062ff607350f75
+      libvirt:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: libvirt
+        reference: a4fa9b761e2de14df588c1e37f3693174f15ad36
+      libvirt-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 9f921f23fb2df702981a0b3d33062ff607350f75
+      #mariadb:
+      #  proxy_server: http://127.0.0.1:3128
+      #  type: git
+      #  location: https://git.openstack.org/openstack/openstack-helm
+      #  subpath: mariadb
+      #  reference: 8dc986740c83487261efa6540f89d5dbea211f98
+      #mariadb-htk:
+      #  proxy_server: http://127.0.0.1:3128
+      #  type: git
+      #  location: https://git.openstack.org/openstack/openstack-helm-infra
+      #  subpath: helm-toolkit
+      #  reference: 9f921f23fb2df702981a0b3d33062ff607350f75
+      mariadb:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://github.com/openstack/openstack-helm
+        subpath: mariadb
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      mariadb-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://github.com/openstack/openstack-helm
+        subpath: helm-toolkit
+        reference: f902cd14fac7de4c4c9f7d019191268a6b4e9601
+      memcached:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: memcached
+        reference: a4fa9b761e2de14df588c1e37f3693174f15ad36
+      memcached-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 9f921f23fb2df702981a0b3d33062ff607350f75
+      neutron:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: neutron
+        reference: a4fa9b761e2de14df588c1e37f3693174f15ad36
+      neutron-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 9f921f23fb2df702981a0b3d33062ff607350f75
+      nova:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: nova
+        reference: a4fa9b761e2de14df588c1e37f3693174f15ad36
+      nova-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 9f921f23fb2df702981a0b3d33062ff607350f75
+      openvswitch:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: openvswitch
+        reference: a4fa9b761e2de14df588c1e37f3693174f15ad36
+      openvswitch-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 9f921f23fb2df702981a0b3d33062ff607350f75
+      rabbitmq:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm
+        subpath: rabbitmq
+        reference: a4fa9b761e2de14df588c1e37f3693174f15ad36
+      rabbitmq-htk:
+        proxy_server: http://127.0.0.1:3128
+        type: git
+        location: https://git.openstack.org/openstack/openstack-helm-infra
+        subpath: helm-toolkit
+        reference: 9f921f23fb2df702981a0b3d33062ff607350f75
+
+  files:
+    kubelet: https://dl.k8s.io/v1.10.2/kubernetes-node-linux-amd64.tar.gz
+  images:
+    ucp:
+      armada:
+        api: quay.io/airshipit/armada:b6479f660714a6d14c6aa291dc36b8451f1c9219
+        dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+        ks_endpoints: docker.io/openstackhelm/heat:ocata
+        ks_service: docker.io/openstackhelm/heat:ocata
+        ks_user: docker.io/openstackhelm/heat:ocata
+        helm: lachlanevenson/k8s-helm:v2.7.2
+        tiller: gcr.io/kubernetes-helm/tiller:v2.7.2
+      promenade:
+        dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+        promenade: quay.io/airshipit/promenade:146c67c6b15d8eccf942d2c048f96c3305948864
+        ks_user: docker.io/openstackhelm/heat:ocata
+        ks_service: docker.io/openstackhelm/heat:ocata
+        ks_endpoints: docker.io/openstackhelm/heat:ocata
+      deckhand:
+        deckhand: quay.io/airshipit/deckhand:59182380e3272fd28f9c21b2e7cdc784f7a36f74
+        dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+        db_init: docker.io/postgres:9.5
+        db_sync: quay.io/airshipit/deckhand:59182380e3272fd28f9c21b2e7cdc784f7a36f74
+        ks_endpoints: docker.io/openstackhelm/heat:ocata
+        ks_service: docker.io/openstackhelm/heat:ocata
+        ks_user: docker.io/openstackhelm/heat:ocata
+      barbican:
+        bootstrap: docker.io/openstackhelm/heat:ocata
+        dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+        scripted_test: docker.io/openstackhelm/heat:ocata
+        db_init: docker.io/openstackhelm/heat:ocata
+        barbican_db_sync: docker.io/openstackhelm/barbican:ocata
+        db_drop: docker.io/openstackhelm/heat:ocata
+        ks_endpoints: docker.io/openstackhelm/heat:ocata
+        ks_service: docker.io/openstackhelm/heat:ocata
+        ks_user: docker.io/openstackhelm/heat:ocata
+        barbican_api: docker.io/openstackhelm/barbican:ocata
+      drydock:
+        drydock: quay.io/airshipit/drydock:7e7739ce2cbe3156a8ecec854639052542d40dcf
+        dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+        ks_user: docker.io/openstackhelm/heat:ocata
+        ks_service: docker.io/openstackhelm/heat:ocata
+        ks_endpoints: docker.io/openstackhelm/heat:ocata
+        drydock_db_init: docker.io/postgres:9.5
+        drydock_db_sync: quay.io/airshipit/drydock:7e7739ce2cbe3156a8ecec854639052542d40dcf
+      shipyard:
+        airflow: quay.io/airshipit/airflow:66da23cb20c545bf82e7d1aec321edf9ebc06cac
+        shipyard: quay.io/airshipit/shipyard:66da23cb20c545bf82e7d1aec321edf9ebc06cac
+        dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+        shipyard_db_init: docker.io/postgres:9.5
+        shipyard_db_sync: quay.io/airshipit/shipyard:66da23cb20c545bf82e7d1aec321edf9ebc06cac
+        airflow_db_init: docker.io/postgres:9.5
+        airflow_db_sync: quay.io/airshipit/airflow:66da23cb20c545bf82e7d1aec321edf9ebc06cac
+        ks_user: docker.io/openstackhelm/heat:ocata
+        ks_service: docker.io/openstackhelm/heat:ocata
+        ks_endpoints: docker.io/openstackhelm/heat:ocata
+        image_repo_sync: docker.io/docker:17.07.0
+      maas:
+        db_init: docker.io/postgres:9.5
+        db_sync: quay.io/airshipit/maas-region-controller:7af3ee934732bf1aec6b452f34727ef563a7f179
+        maas_rack: quay.io/airshipit/maas-rack-controller:7af3ee934732bf1aec6b452f34727ef563a7f179
+        maas_region: quay.io/airshipit/maas-region-controller:7af3ee934732bf1aec6b452f34727ef563a7f179
+        bootstrap: quay.io/airshipit/maas-region-controller:7af3ee934732bf1aec6b452f34727ef563a7f179
+        export_api_key: quay.io/airshipit/maas-region-controller:7af3ee934732bf1aec6b452f34727ef563a7f179
+        maas_cache: quay.io/${URL}/sstream-cache@sha256:sha256:90d0dc73785534ef6a3035265275e197a66727beeb9c979f60d3bbf31a6a8864
+        dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+      keystone:
+        keystone_bootstrap: docker.io/openstackhelm/heat:ocata
+        test: docker.io/kolla/ubuntu-source-rally:4.0.0
+        db_init: docker.io/openstackhelm/heat:ocata
+        keystone_db_sync: docker.io/openstackhelm/keystone:ocata
+        db_drop: docker.io/openstackhelm/heat:ocata
+        keystone_fernet_setup: docker.io/openstackhelm/keystone:ocata
+        keystone_fernet_rotate: docker.io/openstackhelm/keystone:ocata
+        keystone_credential_setup: docker.io/openstackhelm/keystone:ocata
+        keystone_credential_rotate: docker.io/openstackhelm/keystone:ocata
+        keystone_api: docker.io/openstackhelm/keystone:ocata
+        dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+      tiller:
+        tiller: gcr.io/kubernetes-helm/tiller:v2.7.2
+      mariadb:
+        mariadb: docker.io/mariadb:10.1.23
+        dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+      postgresql:
+        postgresql: docker.io/postgres:9.5
+        dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+      memcached:
+        memcached: docker.io/memcached:1.5.5
+        dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+      rabbitmq:
+        rabbitmq: docker.io/rabbitmq:3.7
+        dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+    ceph:
+      ceph:
+        ks_endpoints: docker.io/openstackhelm/heat:ocata
+        ks_service: docker.io/openstackhelm/heat:ocata
+        ks_user: docker.io/openstackhelm/heat:ocata
+        ceph_bootstrap: docker.io/ceph/daemon:tag-build-master-luminous-ubuntu-16.04
+        dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+        ceph_daemon: docker.io/ceph/daemon:tag-build-master-luminous-ubuntu-16.04
+        ceph_config_helper: docker.io/port/ceph-config-helper:v1.7.5
+        ceph_rbd_provisioner: quay.io/external_storage/rbd-provisioner:v0.1.1
+        ceph_cephfs_provisioner: quay.io/external_storage/cephfs-provisioner:v0.1.1
+    storage:
+      nfs_provisioner:
+        nfs_provisioner: quay.io/kubernetes_incubator/nfs-provisioner:v1.0.8
+        dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+        image_repo_sync: docker.io/docker:17.07.0
+    kubernetes:
+      apiserver:
+        anchor: gcr.io/google_containers/hyperkube-amd64:v1.10.2
+        apiserver: gcr.io/google_containers/hyperkube-amd64:v1.10.2
+        dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.0
+      controller-manager:
+        anchor: gcr.io/google_containers/hyperkube-amd64:v1.10.2
+        controller_manager: gcr.io/google_containers/hyperkube-amd64:v1.10.2
+        dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.0
+      coredns:
+        coredns: coredns/coredns:1.0.5
+      haproxy:
+        haproxy: haproxy:1.8.3
+        anchor: gcr.io/google_containers/hyperkube-amd64:v1.10.2
+      etcd:
+        etcd: quay.io/coreos/etcd:v3.2.14
+        etcdctl: quay.io/coreos/etcd:v3.2.14
+      kubectl: gcr.io/google_containers/hyperkube-amd64:v1.10.2
+      pause: gcr.io/google_containers/pause-amd64:3.0
+      scheduler:
+        anchor: gcr.io/google_containers/hyperkube-amd64:v1.10.2
+        scheduler: gcr.io/google_containers/hyperkube-amd64:v1.10.2
+      proxy:
+        proxy: gcr.io/google_containers/hyperkube-amd64:v1.10.2
+    calico:
+      etcd:
+        etcd: quay.io/coreos/etcd:v3.2.14
+        etcdctl: quay.io/coreos/etcd:v3.2.14
+      calico:
+        cni: quay.io/calico/cni:v1.11.2
+        ctl: quay.io/calico/ctl:v1.6.2
+        kube_policy_controller: quay.io/calico/kube-policy-controller:v0.7.0
+        node: quay.io/calico/node:v2.6.5
+        settings: quay.io/calico/ctl:v1.6.2
+  packages:
+    named:
+      docker: docker.io
+      socat: socat=1.7.3.1-1
+    unnamed:
+      - ceph-common=10.2.10-0ubuntu0.16.04.1

@@ -1,0 +1,122 @@
+---
+schema: armada/Chart/v1
+metadata:
+  schema: metadata/Document/v1
+  name: openstack-ceph-config
+  layeringDefinition:
+    abstract: false
+    layer: global
+  storagePolicy: cleartext
+  substitutions:
+    # Chart source
+    - src:
+        schema: pegleg/SoftwareVersions/v1
+        name: software-versions
+        path: .charts.ucp.ceph
+      dest:
+        path: .source
+
+    # Images
+    - src:
+        schema: pegleg/SoftwareVersions/v1
+        name: software-versions
+        path: .images.ceph.ceph
+      dest:
+        path: .values.images.tags
+
+    # IP addresses
+    - src:
+        schema: pegleg/CommonAddresses/v1
+        name: common-addresses
+        path: .storage.ceph.public_cidr
+      dest:
+        path: .values.network.public
+    - src:
+        schema: pegleg/CommonAddresses/v1
+        name: common-addresses
+        path: .storage.ceph.cluster_cidr
+      dest:
+        path: .values.network.cluster
+
+    # Endpoints
+    - src:
+        schema: pegleg/EndpointCatalogue/v1
+        name: ucp_endpoints
+        path: .ceph.object_store
+      dest:
+        path: .values.endpoints.object_store
+    - src:
+        schema: pegleg/EndpointCatalogue/v1
+        name: ucp_endpoints
+        path: .ceph.ceph_mon
+      dest:
+        path: .values.endpoints.ceph_mon
+    - src:
+        schema: pegleg/EndpointCatalogue/v1
+        name: ucp_endpoints
+        path: .ceph.ceph_mgr
+      dest:
+        path: .values.endpoints.ceph_mgr
+
+data:
+  chart_name: openstack-ceph-config
+  release: openstack-ceph-config
+  namespace: openstack
+  timeout: 3600
+  install:
+    no_hooks: false
+  upgrade:
+    no_hooks: false
+    pre:
+      delete:
+        - type: job
+          labels:
+            application: ceph
+            component: client-key-generator
+        - type: job
+          labels:
+            application: ceph
+            component: client-key-cleaner
+  values:
+    labels:
+      job:
+        node_selector_key: openstack-control-plane
+        node_selector_value: enabled
+      provisioner:
+        node_selector_key: openstack-control-plane
+        node_selector_value: enabled
+    ceph:
+      rgw_keystone_auth: true
+    deployment:
+      storage_secrets: false
+      ceph: false
+      rbd_provisioner: false
+      cephfs_provisioner: false
+      client_secrets: true
+      rgw_keystone_user_and_endpoints: false
+  dependencies:
+    - openstack-ceph-config-toolkit
+---
+schema: armada/Chart/v1
+metadata:
+  schema: metadata/Document/v1
+  name: openstack-ceph-config-toolkit 
+  layeringDefinition:
+    abstract: false
+    layer: global
+  storagePolicy: cleartext
+  substitutions:
+    # Chart source
+    - src:
+        schema: pegleg/SoftwareVersions/v1
+        name: software-versions
+        path: .charts.ucp.ceph-htk
+      dest:
+        path: .source
+
+data:
+  chart_name: openstack-ceph-config-helm-toolkit
+  release: openstack-ceph-config-helm-toolkit
+  namespace: helm-toolkit
+  values: {}
+  dependencies: []

@@ -1,0 +1,56 @@
+heat_template_version: 2016-10-14
+
+description: Simple template to create a port
+
+parameters:
+  availability_zone:
+    type: string
+    description: The Availability Zone to launch the instance.
+    default: nova 
+  sriov_net_name1:
+    type: string
+    default: sriov_net1 
+  sriov_subnet_name1:
+    type: string
+    default: sriov_net1_subnet1
+  sriov_net_name2:
+    type: string
+    default: sriov_net2
+  sriov_subnet_name2:
+    type: string
+    default: sriov_net2_subnet1
+  keyname:
+    type: string
+    default: heat-vm-key
+  image:
+    type: string
+    default: ubuntu1604 
+
+resources:
+  sriov_port1:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_param: sriov_net_name1 }
+      binding:vnic_type: direct
+      fixed_ips:
+        - subnet_id: { get_param: sriov_subnet_name1 }
+
+  sriov_port2:
+    type: OS::Neutron::Port
+    properties:
+      network: { get_param: sriov_net_name2 }
+      binding:vnic_type: direct
+      fixed_ips:
+        - subnet_id: { get_param: sriov_subnet_name2 }
+
+  instance:
+    type: OS::Nova::Server
+    properties:
+      flavor: m1.large
+      image: { get_param: image }
+      key_name: { get_param: keyname } 
+      availability_zone: { get_param: availability_zone }
+      networks:
+        - port: { get_resource: sriov_port1 }
+        - port: { get_resource: sriov_port2 }
+

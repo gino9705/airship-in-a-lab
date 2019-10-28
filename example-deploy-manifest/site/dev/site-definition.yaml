@@ -1,0 +1,11 @@
+---
+data:
+  revision: v1.0
+  site_type: cluster 
+metadata:
+  layeringDefinition: {abstract: false, layer: site}
+  name: dev 
+  schema: metadata/Document/v1
+  storagePolicy: cleartext
+schema: pegleg/SiteDefinition/v1
+...

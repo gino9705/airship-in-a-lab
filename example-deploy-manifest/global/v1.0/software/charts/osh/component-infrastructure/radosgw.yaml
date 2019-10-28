@@ -1,0 +1,107 @@
+---
+schema: armada/Chart/v1
+metadata:
+  schema: metadata/Document/v1
+  name: radosgw
+  layeringDefinition:
+    abstract: false
+    layer: global
+  storagePolicy: cleartext
+  substitutions:
+    # Chart source
+    - src:
+        schema: pegleg/SoftwareVersions/v1
+        name: software-versions
+        path: .charts.ucp.ceph
+      dest:
+        path: .source
+
+    # Images
+    - src:
+        schema: pegleg/SoftwareVersions/v1
+        name: software-versions
+        path: .images.ceph.ceph
+      dest:
+        path: .values.images.tags
+
+    # IP addresses
+    - src:
+        schema: pegleg/CommonAddresses/v1
+        name: common-addresses
+        path: .storage.ceph.public_cidr
+      dest:
+        path: .values.network.public
+    - src:
+        schema: pegleg/CommonAddresses/v1
+        name: common-addresses
+        path: .storage.ceph.cluster_cidr
+      dest:
+        path: .values.network.cluster
+
+data:
+  chart_name: radosgw
+  release: radosgw
+  namespace: openstack
+  timeout: 3600
+  install:
+    no_hooks: false
+  upgrade:
+    no_hooks: false
+    pre:
+    pre:
+      delete:
+        - type: job
+          labels:
+            application: ceph
+            component: ks-user
+        - type: job
+          labels:
+            application: ceph
+            component: ks-service
+        - type: job
+          labels:
+            application: ceph
+            component: ks-endpoints
+  values:
+    labels:
+      job:
+        node_selector_key: openstack-control-plane
+        node_selector_value: enabled
+    bootstrap:
+      enabled: false
+    conf:
+      rgw_ks:
+        enabled: true
+    deployment:
+      storage_secrets: false
+      ceph: false
+      rbd_provisioner: false
+      cephfs_provisioner: false
+      client_secrets: false
+      rgw_keystone_user_and_endpoints: true
+  dependencies:
+    - openstack-radosgw-helm-toolkit
+---
+schema: armada/Chart/v1
+metadata:
+  schema: metadata/Document/v1
+  name: openstack-radosgw-helm-toolkit
+  layeringDefinition:
+    abstract: false
+    layer: global
+  storagePolicy: cleartext
+  substitutions:
+    # Chart source
+    - src:
+        schema: pegleg/SoftwareVersions/v1
+        name: software-versions
+        path: .charts.ucp.ceph-htk
+      dest:
+        path: .source
+
+data:
+  chart_name: openstack-radosgw-helm-toolkit
+  release: openstack-radosgw-helm-toolkit
+  namespace: helm-toolkit
+  values: {}
+  dependencies: []

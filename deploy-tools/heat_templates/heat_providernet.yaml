@@ -1,0 +1,38 @@
+heat_template_version: 2013-05-23
+
+description: >
+   HOT template that creates one network.
+
+parameters:
+  net_name_1:
+    type: string
+    default: oam
+    description: Name of network
+  net_cidr_1:
+    default: 172.29.1.128/26 
+    type: comma_delimited_list
+    description: fake subnet (not used by VMs)
+  physnet:
+    type: string
+    default: oam
+    description: physical network
+  vlanid:
+    default: 2004 
+    type: string
+
+resources:
+  net_1:
+    type: OS::Neutron::ProviderNet
+    properties:
+      name: { get_param: net_name_1 }
+      network_type: vlan
+      physical_network: { get_param: physnet}
+      segmentation_id: { get_param: vlanid}
+      shared: True
+      admin_state_up: True
+
+  ip_subnet:
+    type: OS::Neutron::Subnet
+    properties:
+      network_id: { get_resource: net_1 }
+      cidr: {get_param: [net_cidr_1, 0] }

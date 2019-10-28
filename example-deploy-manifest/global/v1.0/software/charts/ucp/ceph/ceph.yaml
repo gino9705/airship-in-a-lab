@@ -1,0 +1,184 @@
+---
+schema: armada/Chart/v1
+metadata:
+  schema: metadata/Document/v1
+  name: ucp-ceph-global
+  layeringDefinition:
+    abstract: true
+    layer: global
+  storagePolicy: cleartext
+  labels:
+    name: ucp-ceph-global
+  substitutions:
+    - src:
+        schema: pegleg/SoftwareVersions/v1
+        name: software-versions
+        path: .charts.ucp.ceph
+      dest:
+        path: .source
+    - src:
+        schema: pegleg/SoftwareVersions/v1
+        name: software-versions
+        path: .images.ceph.ceph
+      dest:
+        path: .values.images.tags
+    - src:
+        schema: pegleg/CommonAddresses/v1
+        name: common-addresses
+        path: .storage.ceph.public_cidr
+      dest:
+        path: .values.network.public
+    - src:
+        schema: pegleg/CommonAddresses/v1
+        name: common-addresses
+        path: .storage.ceph.cluster_cidr
+      dest:
+        path: .values.network.cluster
+    - src:
+        schema: pegleg/EndpointCatalogue/v1
+        name: ucp_endpoints
+        path: .ucp.identity
+      dest:
+        path: .values.endpoints.identity
+    - src:
+        schema: pegleg/EndpointCatalogue/v1
+        name: ucp_endpoints
+        path: .ceph.object_store
+      dest:
+        path: .values.endpoints.object_store
+    - src:
+        schema: pegleg/EndpointCatalogue/v1
+        name: ucp_endpoints
+        path: .ceph.ceph_mon
+      dest:
+        path: .values.endpoints.ceph_mon
+    - src:
+        schema: pegleg/EndpointCatalogue/v1
+        name: ucp_endpoints
+        path: .ceph.ceph_mgr
+      dest:
+        path: .values.endpoints.ceph_mgr
+data:
+  chart_name: ceph
+  release: ucp-ceph
+  namespace: ceph
+  timeout: 900
+  wait:
+    timeout: 900
+  install:
+    no_hooks: false
+  upgrade:
+    no_hooks: false
+    pre:
+      delete:
+        - type: job
+          labels:
+            application: ceph
+            component: bootstrap
+        - type: job
+          labels:
+            application: ceph
+            component: cephfs-client-key-generator
+        - type: job
+          labels:
+            application: ceph
+            component: mds-keyring-generator
+        - type: job
+          labels:
+            application: ceph
+            component: osd-keyring-generator
+        - type: job
+          labels:
+            application: ceph
+            component: rgw-keyring-generator
+        - type: job
+          labels:
+            application: ceph
+            component: mon-keyring-generator
+        - type: job
+          labels:
+            application: ceph
+            component: mgr-keyring-generator
+        - type: job
+          labels:
+            application: ceph
+            component: rbd-pool
+        - type: job
+          labels:
+            application: ceph
+            component: storage-keys-generator
+  values:
+    labels:
+      job:
+        node_selector_key: ucp-control-plane
+        node_selector_value: enabled
+      provisioner:
+        node_selector_key: ucp-control-plane
+        node_selector_value: enabled
+    endpoints:
+      identity:
+        namespace: openstack
+      object_store:
+        namespace: ceph
+      ceph_mon:
+        namespace: ceph
+    ceph:
+      rgw_keystone_auth: true
+    deployment:
+      ceph: true
+      client_secrets: false
+      rbd_provisioner: true
+      cephfs_provisioner: true
+      rgw_keystone_user_and_endpoints: false
+      storage_secrets: true
+    bootstrap:
+      enabled: true
+    conf:
+      storage:
+        osd:
+          - data:
+              type: directory
+              location: /data/openstack-helm/ceph/osd/osd-one
+            journal:
+              type: directory
+              location: /data/openstack-helm/ceph/osd/journal-one
+      osd:
+        osd_crush_chooseleaf_type: 0
+      pool:
+        crush:
+          tunables: 'hammer'
+        target:
+          osd: 1
+          pg_per_osd: 100
+        default:
+          crush_rule: same_host
+      ceph:
+        global:
+          osd_pool_default_size: 1
+  dependencies:
+    - ceph-htk
+...
+---
+schema: armada/Chart/v1
+metadata:
+  schema: metadata/Document/v1
+  name: ceph-htk
+  layeringDefinition:
+    abstract: false
+    layer: global
+  storagePolicy: cleartext
+  substitutions:
+    - src:
+        schema: pegleg/SoftwareVersions/v1
+        name: software-versions
+        path: .charts.ucp.ceph-htk
+      dest:
+        path: .source
+data:
+  chart_name: ceph-htk
+  release: ceph-htk
+  namespace: ceph-htk
+  timeout: 100
+  values: {}
+  dependencies: []
+...

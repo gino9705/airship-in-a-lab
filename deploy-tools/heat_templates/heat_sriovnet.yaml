@@ -1,0 +1,61 @@
+heat_template_version: 2016-10-14
+
+description: Simple template to create a vlan network
+
+parameters:
+  physnet1:
+    type: string
+    default: sriovnet1
+  physnet2:
+    type: string
+    default: sriovnet2
+  vlanid1:
+    type: string
+    default: 0
+  vlanid2:
+    type: string
+    default: 167
+  sriov_net_name1:
+    type: string
+    default: sriov_net1
+  sriov_subnet_name1:
+    type: string
+    default: sriov_net1_subnet1
+  sriov_net_name2:
+    type: string
+    default: sriov_net2
+  sriov_subnet_name2:
+    type: string
+    default: sriov_net2_subnet1
+
+resources:
+  provider_sriov1:
+    type: OS::Neutron::ProviderNet
+    properties:
+      name: { get_param: sriov_net_name1 }
+      network_type: vlan
+      physical_network: { get_param: physnet1 }
+      segmentation_id: { get_param: vlanid1 }
+      shared: True
+      admin_state_up: True
+  private_sriov_subnet1:
+    type: OS::Neutron::Subnet
+    properties:
+      name: { get_param : sriov_subnet_name1 }
+      network_id: { get_resource : provider_sriov1 }
+      cidr: 192.168.0.0/24
+  provider_sriov2:
+    type: OS::Neutron::ProviderNet
+    properties:
+      name: { get_param: sriov_net_name2 }
+      network_type: vlan
+      physical_network: { get_param: physnet2 }
+      segmentation_id: { get_param: vlanid2 }
+      shared: True
+      admin_state_up: True
+  private_sriov_subnet2:
+    type: OS::Neutron::Subnet
+    properties:
+      name: { get_param : sriov_subnet_name2 }
+      network_id: { get_resource : provider_sriov2 }
+      cidr: 192.168.1.0/24
